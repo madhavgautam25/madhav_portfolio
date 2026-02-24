@@ -5,7 +5,7 @@ export const personalInfo = {
   email: "gautam.madhav63@gmail.com",
   linkedin: "https://linkedin.com/in/madhav-gautam06",
   github: "https://github.com/madhavgautam25",
-  resumeUrl: "src/assets/RESUME.pdf",
+  resumeUrl: "/RESUME.pdf",
 };
 
 export const aboutText = [
