@@ -55,6 +55,16 @@ export const skills = [
       { name: "AI Integration", icon: "" },
     ],
   },
+  {
+    category: "Languages",
+    items: [
+      { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+      { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
+      { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "DSA in Java", icon: "" },
+    ],
+  },
 ];
 
 export interface Project {

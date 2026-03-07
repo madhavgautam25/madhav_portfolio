@@ -9,6 +9,7 @@ import Education from '@/components/Education';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import AnimatedBackground from '@/components/AnimatedBackground';
+import SectionDivider from '@/components/SectionDivider';
 
 const Index = () => {
   const { dark, toggle } = useTheme();
@@ -19,11 +20,17 @@ const Index = () => {
       <Navbar dark={dark} toggle={toggle} />
       <main className="relative z-10">
         <Hero />
+        <SectionDivider variant="gradient" />
         <About />
+        <SectionDivider variant="gradient" />
         <Skills />
+        <SectionDivider variant="gradient" />
         <Projects />
+        <SectionDivider variant="gradient" />
         <Experience />
+        <SectionDivider variant="gradient" />
         <Education />
+        <SectionDivider variant="gradient" />
         <Contact />
       </main>
       <Footer />

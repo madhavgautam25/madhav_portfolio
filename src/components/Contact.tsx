@@ -32,7 +32,7 @@ export default function Contact() {
     }
   };
 
-  const inputClasses = "w-full px-4 py-3 rounded-xl bg-background border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300 hover:border-primary/30";
+  const inputClasses = "w-full px-5 py-3 rounded-xl bg-secondary/50 border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/60 focus:border-primary/40 transition-all duration-300 hover:border-primary/30 hover:bg-secondary/70 placeholder:text-muted-foreground/50";
 
   return (
     <section id="contact" className="py-24 px-6 bg-muted/30 relative overflow-hidden">
@@ -76,9 +76,9 @@ export default function Contact() {
             <motion.button
               type="submit"
               disabled={sending}
-              whileHover={{ scale: 1.05, boxShadow: '0 0 40px hsl(25 95% 53% / 0.4)' }}
-              whileTap={{ scale: 0.97 }}
-              className="gradient-orange-btn text-white px-8 py-3 rounded-xl font-semibold inline-flex items-center gap-2 transition-all orange-glow disabled:opacity-50"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="gradient-orange-btn text-white px-8 py-3 rounded-xl font-semibold inline-flex items-center gap-2 transition-all orange-glow shadow-premium-lg disabled:opacity-50 disabled:hover:scale-100 w-full justify-center"
             >
               {sending ? <><Loader2 size={16} className="animate-spin" /> Sending...</> : <>Send Message <Send size={16} /></>}
             </motion.button>

@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
+import KeyboardNavigation from "./components/KeyboardNavigation";
+import ScrollProgressBar from "./components/ScrollProgressBar";
+import AnimatedStars from "./components/AnimatedStars";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +19,10 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <AnimatedStars />
+        <ScrollProgressBar />
+        <ScrollToTop />
+        <KeyboardNavigation />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />

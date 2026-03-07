@@ -84,6 +84,7 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   html {
@@ -94,9 +95,17 @@
 @layer components {
   .glass {
     background: hsl(var(--glass-bg));
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid hsl(var(--glass-border));
+  }
+
+  .glass-premium {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: inset 0 1px 2px hsl(var(--foreground) / 0.05);
   }
 
   .gradient-orange {
@@ -112,18 +121,37 @@
 
   .gradient-orange-btn {
     background: linear-gradient(135deg, hsl(0 0% 8%), hsl(20 85% 40%), hsl(25 95% 53%));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .gradient-orange-btn:hover {
     background: linear-gradient(135deg, hsl(0 0% 12%), hsl(20 90% 45%), hsl(25 100% 58%));
+    box-shadow: 0 20px 40px hsl(25 95% 53% / 0.2), 0 4px 8px hsl(25 95% 53% / 0.1);
+    transform: translateY(-2px);
   }
 
   .orange-glow {
-    box-shadow: 0 0 30px -5px hsl(25 95% 53% / 0.3);
+    box-shadow: 0 0 40px -8px hsl(25 95% 53% / 0.4);
+  }
+
+  .orange-glow-hover {
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .orange-glow-hover:hover {
-    box-shadow: 0 0 40px -5px hsl(25 95% 53% / 0.4);
+    box-shadow: 0 0 60px -5px hsl(25 95% 53% / 0.5), 0 0 30px -8px hsl(25 95% 53% / 0.3);
+  }
+
+  .shadow-premium {
+    box-shadow: 0 20px 40px -20px hsl(0 0% 0% / 0.1), 0 0 1px hsl(0 0% 0% / 0.05);
+  }
+
+  .shadow-premium-lg {
+    box-shadow: 0 25px 50px -12px hsl(0 0% 0% / 0.25);
+  }
+
+  .shadow-premium-xl {
+    box-shadow: 0 30px 60px -20px hsl(0 0% 0% / 0.3), 0 0 1px hsl(0 0% 0% / 0.1);
   }
 
   @keyframes spin-slow {
@@ -131,7 +159,84 @@
     to { transform: rotate(360deg); }
   }
 
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px hsl(25 95% 53% / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(25 95% 53% / 0.5); }
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
   .animate-spin-slow {
     animation: spin-slow 3s linear infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 6s ease infinite;
+  }
+
+  /* Mesh gradient background */
+  @keyframes mesh-gradient {
+    0%, 100% {
+      background-position: 0% 0%, 100% 0%, 50% 100%, 0% 50%, 150% 50%;
+    }
+    25% {
+      background-position: 10% 10%, 90% 20%, 45% 80%, 20% 60%, 125% 50%;
+    }
+    50% {
+      background-position: 20% 20%, 80% 10%, 50% 90%, 30% 40%, 100% 60%;
+    }
+    75% {
+      background-position: 10% 30%, 85% 30%, 55% 70%, 25% 50%, 110% 40%;
+    }
+  }
+
+  body {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: 
+      radial-gradient(circle at 20% 50%, hsl(25 95% 53% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(25 95% 53% / 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 60% 80%, hsl(25 95% 53% / 0.05) 0%, transparent 50%);
+    background-size: 200% 200%;
+    animation: mesh-gradient 15s ease infinite;
+  }
+
+  /* Enhanced theme transition */
+  * {
+    @apply transition-colors duration-300;
   }
 }

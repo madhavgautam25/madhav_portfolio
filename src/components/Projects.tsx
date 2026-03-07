@@ -21,7 +21,13 @@ const cardVariants = {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-6 relative">
+    <section id="projects" className="py-24 px-6 relative overflow-hidden">
+      {/* Premium gradient orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/8 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-primary/6 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      </div>
+
       {/* Grid pattern */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]"
         style={{
@@ -30,7 +36,7 @@ export default function Projects() {
         }}
       />
 
-      <div className="max-w-5xl mx-auto relative">
+      <div className="max-w-5xl mx-auto relative z-10">
         <SectionHeading title="Projects" />
 
         {/* Terminal header */}
@@ -38,13 +44,13 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center gap-2 mb-8 text-xs text-muted-foreground font-mono"
+          className="flex items-center gap-2 mb-10 text-xs text-muted-foreground font-mono px-4 py-3 rounded-lg bg-secondary/30 border border-border/50 inline-flex"
         >
           <Terminal size={14} className="text-primary" />
           <span>~/madhav/projects</span>
-          <span className="text-primary">$</span>
+          <span className="text-primary font-bold">$</span>
           <span>ls -la</span>
-          <span className="animate-pulse text-primary">▌</span>
+          <span className="animate-pulse text-primary font-bold">▌</span>
         </motion.div>
 
         <motion.div
@@ -54,68 +60,76 @@ export default function Projects() {
           viewport={{ once: true, margin: '-60px' }}
           className="grid md:grid-cols-2 gap-6"
         >
-          {projects.map((project) => (
+          {projects.map((project, idx) => (
             <motion.div
               key={project.title}
               variants={cardVariants}
-              whileHover={{ y: -8, scale: 1.01 }}
-              className="glass rounded-2xl p-6 border border-border hover:border-primary/40 transition-all duration-300 orange-glow-hover group relative overflow-hidden"
+              whileHover={{ y: -10, scale: 1.02 }}
+              className="glass-premium rounded-2xl p-6 border border-border hover:border-primary/40 transition-all duration-300 orange-glow-hover group relative overflow-hidden shadow-premium hover:shadow-premium-lg"
             >
-              {/* Hover gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.06] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+              {/* Premium gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.08] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
 
               {/* Corner decoration */}
-              <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
-                <div className="absolute top-0 right-0 w-[1px] h-8 bg-gradient-to-b from-primary/40 to-transparent" />
-                <div className="absolute top-0 right-0 h-[1px] w-8 bg-gradient-to-l from-primary/40 to-transparent" />
+              <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden rounded-bl-2xl">
+                <div className="absolute top-0 right-0 w-[1px] h-12 bg-gradient-to-b from-primary/50 to-transparent" />
+                <div className="absolute top-0 right-0 h-[1px] w-12 bg-gradient-to-l from-primary/50 to-transparent" />
               </div>
 
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-primary font-mono text-xs">&gt;_</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-primary font-mono text-xs font-bold">&gt;_</span>
                     <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
                   </div>
                   <Link to={`/project/${project.slug}`}>
                     <motion.div
-                      initial={{ rotate: 0 }}
-                      whileHover={{ rotate: 45 }}
+                      initial={{ rotate: 0, y: 0 }}
+                      whileHover={{ rotate: 45, y: -2 }}
                       className="text-muted-foreground group-hover:text-primary transition-colors"
                     >
-                      <ArrowUpRight size={20} />
+                      <ArrowUpRight size={22} strokeWidth={2} />
                     </motion.div>
                   </Link>
                 </div>
 
-                {/* Status */}
-                <div className="mb-3">
-                  <span className={`text-[10px] font-mono uppercase tracking-wider ${
-                    project.status === 'Completed' ? 'text-accent' : 'text-primary'
+                {/* Status badge */}
+                <div className="mb-4">
+                  <span className={`text-[10px] font-mono uppercase tracking-widest font-bold px-2.5 py-1 rounded-full inline-block ${
+                    project.status === 'Completed' 
+                      ? 'text-accent bg-accent/10 border border-accent/20' 
+                      : 'text-primary bg-primary/10 border border-primary/20'
                   }`}>
                     [{project.status}]
                   </span>
                 </div>
 
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                <p className="text-foreground/80 text-sm mb-5 leading-relaxed font-medium">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-5">
+
+                <div className="flex flex-wrap gap-2 mb-6">
                   {project.tech.map((t) => (
-                    <span key={t} className="px-2.5 py-0.5 rounded-full text-xs font-mono font-medium bg-primary/10 text-primary border border-primary/20">
+                    <motion.span 
+                      key={t} 
+                      whileHover={{ y: -2 }}
+                      className="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-primary/10 text-primary border border-primary/20 hover:border-primary/40 transition-all"
+                    >
                       {t}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-3">
+
+                <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                  <div className="flex gap-4">
                     <motion.a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ x: 2 }}
-                      className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                      whileHover={{ x: 3 }}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <Github size={16} /> GitHub
@@ -125,17 +139,17 @@ export default function Projects() {
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ x: 2 }}
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                        whileHover={{ x: 3 }}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <ExternalLink size={16} /> Live Demo
+                        <ExternalLink size={16} /> Live
                       </motion.a>
                     )}
                   </div>
                   <Link
                     to={`/project/${project.slug}`}
-                    className="text-xs font-mono text-primary hover:underline"
+                    className="text-xs font-mono font-bold text-primary hover:text-primary/80 transition-colors"
                   >
                     View Details →
                   </Link>
