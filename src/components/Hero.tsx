@@ -181,7 +181,7 @@ export default function Hero() {
                 <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2, repeat: Infinity }}>
                   <Sparkles size={16} className="text-primary" />
                 </motion.div>
-                <span className="text-xs font-semibold text-foreground">Available Now</span>
+                <span className="text-xs font-semibold text-foreground">Open to collaborate!</span>
               </div>
             </div>
           </motion.div>
